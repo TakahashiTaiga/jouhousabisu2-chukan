@@ -13,7 +13,7 @@ from controller import controller
 
 if __name__ == '__main__':
     # コントローラーのインスタンス化、実行を繰り返す
+    c = controller()
     while True:
-        controller = controller()
-        controller.ask()
+        c.askUser()
     

@@ -18,28 +18,28 @@ class controller:
         self.view = view()
         self.model = model()
     
-    def ask(self):
+    def askUser(self):
         # 誰か尋ねる
         self.user = self.view.askWho()
         b = self.model.findUser(self.user)
 
         # 知らない人だったら終わる
         if b:
-            self.order()
+            self.setOrder()
         else:
             print("I don't know.")
             print()
             return
     
-    def order(self):
+    def setOrder(self):
         # 購入か購入履歴の閲覧かを聞きそれぞれの処理に行く
         self.order = self.view.askOrder()
         if self.order == 'buy':
-            self.buy()
+            self.buyItem()
         elif self.order == 'show':
-            self.show()
+            self.showHistory()
 
-    def buy(self):
+    def buyItem(self):
         # 買うものを聞く
         self.item = self.view.askItem()
         # 買う個数を聞く
@@ -56,7 +56,7 @@ class controller:
         # レシートを出力する
         self.view.receipt(self.user, self.item, self.num, self.subtotal)
 
-    def show(self):
+    def showHistory(self):
         # 購入履歴を持ってきて出力する
         purchase_history_list = self.model.getPurchaseHistory(self.user)
         self.view.showPurchaseHistory(purchase_history_list)
